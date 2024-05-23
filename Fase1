@@ -1,0 +1,59 @@
+import pandas as pd
+
+# Cargar el archivo CSV proporcionado
+```
+data = pd.read_csv('/mnt/data/spaces_2xM6eba0rsw3ijtXv8rf_uploads_git-blob-205d161e1b6eef10e6d5779063802c3564638e28_HR RAW DATA.csv')
+```
+
+# Mostrar las primeras filas del conjunto de datos
+```
+print("Primeras filas del conjunto de datos:")
+print(data.head())
+```
+
+# Mostrar las últimas filas del conjunto de datos
+```
+print("\nÚltimas filas del conjunto de datos:")
+print(data.tail())
+```
+
+# Mostrar una muestra aleatoria de 5 filas del conjunto de datos
+```
+print("\nMuestra aleatoria de 5 filas del conjunto de datos:")
+print(data.sample(5))
+```
+
+# Mostrar el nombre de todas las columnas en el conjunto de datos
+```
+print("\nNombres de todas las columnas en el conjunto de datos:")
+print(data.columns)
+
+# Mostrar información general sobre el conjunto de datos
+```
+print("\nInformación general sobre el conjunto de datos:")
+print(data.info())
+```
+
+# Verificar si hay valores nulos en el conjunto de datos
+```
+print("\nValores nulos en el conjunto de datos:")
+print(data.isnull().sum())
+```
+
+# Verificar los valores únicos en cada columna
+```
+print("\nValores únicos en cada columna del conjunto de datos:")
+print(data.nunique())
+```
+
+# Mostrar estadísticas descriptivas para las columnas numéricas
+```
+print("\nEstadísticas descriptivas para las columnas numéricas:")
+print(data.describe())
+```
+
+# Mostrar los tipos de datos de cada columna
+```
+print("\nTipos de datos de cada columna:")
+print(data.dtypes)
+```
