@@ -19,9 +19,9 @@ class DAO:
             print("Error al intentar la conexión con la base de datos {0}".format(ex))
             print("Error al intentar realizar la consulta: {0}".format(ex))
             
-    def crear_BBDD(self,nombre_BBDD):
+    def crear_BBDD(self):
         
-                                 
+            nombre_BBDD = 'abc_Corporation'                 
             try:
                 cursor =self.conexion.cursor()
                 
