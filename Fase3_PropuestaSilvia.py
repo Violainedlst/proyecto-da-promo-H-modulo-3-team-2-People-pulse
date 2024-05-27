@@ -13,7 +13,7 @@ class DAO:
         try:
          self.conexion =mysql.connector.connect(user = 'root',password='AlumnaAdalab',host='localhost',port='3306')
          
-         #print(self.conexion)
+         print(self.conexion)
         
         except Error as ex:
             print("Error al intentar la conexión con la base de datos {0}".format(ex))
