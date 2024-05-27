@@ -88,28 +88,33 @@ CREATE SCHEMA Abc_Corporation;
 
 /*CREATE TABLE employees (
 EmployeeNumber INT NOT NULL PRIMARY KEY, --> Se puede utilizar como id de empleado.
-id_employee --> Habria que cambiar el pk en el dataframe. Creo que se puede eliminar
 age  --> La edad del empleado
 gender --> El género del empleado. Donde 0 corresponde con "hombre" y 1 con "mujer".
 DateBirth --> Año de nacimiento del empleado (teniendo en cuenta que los datos fueron recogidos en el 2023)
 NumberChildren --> Número de hijos de los empleados.
+marital_status -- > El estado civil del empleado (por ejemplo, "Single", "Married", etc.).
 over_18 --> Indica si el empleado es mayor de 18 años. Creo que se puede eliminar porque no aporta nada
+attrition --> Indica si el empleado ha dejado la empresa ("No" significa que no ha dejado la empresa y "Yes" 
+			  significa que ha dejado la empresa).
  );
 
 CREATE TABLE employees_details (
 employee_number FK
-attrition --> Indica si el empleado ha dejado la empresa ("No" significa que no ha dejado la empresa y "Yes" 
-			  significa que ha dejado la empresa).
-business_travel --> Describe la frecuencia de los viajes relacionados con el trabajo del empleado 
-					(por ejemplo, "Travel_Rarely" para raramente).
-department -->  El departamento en el que trabaja el empleado (por ejemplo, "Research & Development", "Sales", etc.).
+id_department FK
 JobRole --> El rol o puesto de trabajo del empleado.
 remote_work --> Si el empleado puede teletrabajar o no.
-years_at_company --> Años que el empleado ha trabajado en la empresa 
-years_in_current_role -->  Años que el empleado ha estado en su puesto actual.
-years_since_last_promotion --> Años desde la última promoción del empleado.
-years_with_curr_manager --> Años que el empleado ha estado bajo la supervisión del actual gerente.
+distance_from_home --> La distancia desde el hogar del empleado hasta su lugar de trabajo.
+standard_hours --> Las horas estándar de trabajo.
+overtime --> Indica si el empleado trabaja horas extras ("Yes" para sí o "No" para no).
+business_travel --> Describe la frecuencia de los viajes relacionados con el trabajo del empleado 
+					(por ejemplo, "Travel_Rarely" para raramente).
+stock_option_level --> Nivel de opciones de compra de acciones del empleado.
 ); 
+
+CREATE TABLE departments (
+id_department PK
+department -->  El departamento en el que trabaja el empleado (por ejemplo, "Research & Development", "Sales", etc.).
+);
 
 CREATE TABLE Education (
 id_education --> PK
@@ -123,6 +128,7 @@ EmployeeNumber FK
 daily_rate --> La tarifa diaria del empleado.
 hourly_rate --> La tarifa por hora del empleado.
 monthly_income --> Ingresos mensuales del empleado.
+monthly_rate --> Tasa mensual del empleado.
 percent_salary_hike --> El porcentaje de aumento salarial del empleado.
 salary --> Salario de los empleados.
 same_as_monthly_income -->
@@ -130,23 +136,25 @@ same_as_monthly_income -->
 
 CREATE TABLE satisfaction(
 EmployeeNumber FK -->
-environment_satisfaction -->
-job_involvement -->
-job_satisfaction -->
-performance_rating -->
-relationship_satisfaction -->
-work_life_balance -->
+environment_satisfaction --> Nivel de satisfacción del empleado en relación con su entorno de trabajo. 
+							Con valores que estan comprendidos entre el 1 y el 4, siendo el 4 el nivel de 
+							máxima satisfacción.
+job_involvement --> Nivel de implicación del empleado en su trabajo.
+job_satisfaction --> Nivel de satisfacción del empleado con su trabajo.
+performance_rating --> Calificación de rendimiento del empleado.
+relationship_satisfaction --> Nivel de satisfacción en las relaciones interpersonales del empleado.
+work_life_balance -->  Equilibrio entre trabajo y vida personal del empleado.
 );
 
-CREATE TABLE more_details(
+CREATE TABLE cv_details(
 EmployeeNumber FK -->
-distance_from_home -->
-num_companies_worked -->
-training_times_last_year -->
-standard_hours -->
-stock_option_level -->
-total_working_years -->
-overtime -->
+num_companies_worked --> Número de compañías en las que el empleado ha trabajado.
+training_times_last_year --> Número de veces que el empleado recibió capacitación el año pasado.
+total_working_years --> Total de años de experiencia laboral del empleado.
+years_at_company --> Años que el empleado ha trabajado en la empresa 
+years_in_current_role -->  Años que el empleado ha estado en su puesto actual.
+years_since_last_promotion --> Años desde la última promoción del empleado.
+years_with_curr_manager --> Años que el empleado ha estado bajo la supervisión del actual gerente.
 
 );
 */
