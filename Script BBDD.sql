@@ -38,7 +38,7 @@ FOREIGN KEY (employee_number) REFERENCES employees (employee_number)
 
 CREATE TABLE salaries (
 employee_number INT NOT NULL,
-monthly_income INT,     -- > Ingresos mensuales del empleado.
+monthly_income INT,                -- > Ingresos mensuales del empleado.
 monthly_rate INT,                  -- > Tasa mensual del empleado.
 hourly_rate INT,                   -- > La tarifa por hora del empleado.
 percent_salary_hike DECIMAL(5, 2), -- > El porcentaje de aumento salarial del empleado.
@@ -47,8 +47,8 @@ FOREIGN KEY (employee_number) REFERENCES employees (employee_number)
 
 CREATE TABLE satisfaction(
 employee_number INT NOT NULL,
-environment_satisfaction INT, 
-job_involvement INT,
+environment_satisfaction INT,    -- > Nivel de satisfacción del empleado en relación con su entorno de trabajo. Con valores que estan comprendidos entre el 1 y el 4, siendo el 4 el nivel de máxima satisfacción.
+job_involvement INT,             -- > Nivel de implicación del empleado en su trabajo.
 job_satisfaction INT,            -- > Nivel de satisfacción del empleado con su trabajo.
 performance_rating INT,          -- > Calificación de rendimiento del empleado.
 relationship_satisfaction INT,   -- > Nivel de satisfacción en las relaciones interpersonales del empleado.
@@ -62,7 +62,7 @@ num_companies_worked INT,        -- > Número de compañías en las que el emple
 training_times_last_year INT,    -- > Número de veces que el empleado recibió capacitación el año pasado.
 total_working_years INT,         -- > Total de años de experiencia laboral del empleado.
 years_at_company INT,            -- > Años que el empleado ha trabajado en la empresa 
-years_in_current_role INT,       -- >  Años que el empleado ha estado en su puesto actual.
+years_in_current_role INT,       -- > Años que el empleado ha estado en su puesto actual.
 years_since_last_promotion INT,  -- > Años desde la última promoción del empleado.
 years_with_curr_manager INT,     -- > Años que el empleado ha estado bajo la supervisión del actual gerente.
 FOREIGN KEY (employee_number) REFERENCES employees (employee_number)
