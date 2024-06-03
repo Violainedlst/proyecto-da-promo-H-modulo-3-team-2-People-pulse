@@ -2,6 +2,8 @@
 import mysql.connector
 from mysql.connector import Error
 from mysql.connector import errorcode
+from tkinter import messagebox
+import queries as qu
 import pandas as pd
 import numpy as np
 import requests
@@ -10,55 +12,39 @@ import os
 
 class DAO:
     def __init__(self):
-        try:
-         self.conexion =mysql.connector.connect(user = 'root',password='AlumnaAdalab',host='localhost',database='abc_corporation',port='3306')
-         
-         #print(self.conexion)
-        
-        except Error as ex:
-            print("Error al intentar la conexión con la base de datos {0}".format(ex))
-          
-            
-    def crear_BBDD(self):
-        
-            nombre_BBDD = 'abc_corporation'                 
-            try:
-                cursor =self.conexion.cursor()
-                
-                sql = "CREATE DATABASE {}".format(nombre_BBDD)
-                
-                #sql = "CREATE DATABASE %s"
-                
-                cursor.execute(sql)
-                
-                self.conexion.commit()
-                
-                print ("Base de datos creado correctamente")
-                          
-            except Error as ex:
-                
-                print("Error al crear la base de datos: {0}".format(ex))
+        pass
     
-    # Creamos las tablas
-              
-    def crear_Tablas(self):
-        
-        self.conexion.database = 'abc_corporation'
-        
-        if self.conexion.is_connected():
+    def creacion_bbdd_tablas(self,query,nombre_BBDD=None):
+     
+        if nombre_BBDD is not None:
+                
+            conexion =mysql.connector.connect(user = 'root',password='AlumnaAdalab',host='localhost',port='3306')
+            cursor =conexion.cursor()
+                
             try:
-                cursor = self.conexion.cursor()               
+               cursor.execute(query)
+              
+               messagebox.showinfo("Spoiler Alert!!!!","Base de datos creada correctamente") # título, mensaje 
+               
+            except mysql.connector.Error as err:
+               messagebox.showerror("Spoiler Alert!!!!", f"Error de conexión: {err.msg}")
             
-                # Crear la tabla si no existe
-                sql = "CREATE TABLE IF NOT EXISTS XXXXXXXX ()"
-                cursor.execute(sql)
-                self.conexion.commit()
-                print("Tabla  creada correctamente")
-                               
-            except Error as ex:
-                print("Error al crear la tabla: {0}".format(ex))
+            #finally:
+                #cursor.close()
+                #conexion.close()
+        else:
+            conexion =mysql.connector.connect(user = 'root',password='AlumnaAdalab',host='localhost',port='3306',database=nombre_BBDD)
+            cursor=conexion.cursor()
+            try:
+                cursor.execute(query)               
                 
-                
+            except mysql.connector.Error as err:
+                print(err)
+                print("Error Code:", err.errno)
+                print("SQLSTATE", err.sqlstate)
+                print("Message", err.msg)
+            
+                          
     def cargar_datos_BBDD (self):
              
         # Cambiar a la base de datos especificada
@@ -101,4 +87,3 @@ class DAO:
            except mysql.connector.Error as err:
                 print("Ha habido un error en la inserción")
                 print(err)
-
