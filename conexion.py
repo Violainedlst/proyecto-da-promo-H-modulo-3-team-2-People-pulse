@@ -11,7 +11,7 @@ import os
 class DAO:
     def __init__(self):
         try:
-         self.conexion =mysql.connector.connect(database='abc_corporation',user = 'root',password='AlumnaAdalab',host='localhost',port='3306')
+         self.conexion =mysql.connector.connect(user = 'root',password='AlumnaAdalab',host='localhost',database='abc_corporation',port='3306')
          
          #print(self.conexion)
         
@@ -101,3 +101,4 @@ class DAO:
            except mysql.connector.Error as err:
                 print("Ha habido un error en la inserción")
                 print(err)
+
