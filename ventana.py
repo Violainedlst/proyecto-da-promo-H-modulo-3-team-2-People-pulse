@@ -6,6 +6,7 @@ from PIL import Image, ImageTk
 from conexion import  DAO
 import queries as qu
 import pandas as pd
+import numpy as np
 
 class Ventana(Frame): #Clase ventana de tipo frame
     
