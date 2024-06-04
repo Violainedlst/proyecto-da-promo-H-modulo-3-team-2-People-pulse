@@ -50,7 +50,7 @@ query_creacion_tabla_salaries = """
                                 
                                 """
 
-query_creacion_tabla_salaries = """
+query_creacion_tabla_satisfaction = """
                                     CREATE TABLE abc_corporation.satisfaction(
                                     employee_number INT NOT NULL,
                                     environment_satisfaction INT,    -- > Nivel de satisfacción del empleado en relación con su entorno de trabajo. Con valores que estan comprendidos entre el 1 y el 4, siendo el 4 el nivel de máxima satisfacción.
@@ -62,7 +62,7 @@ query_creacion_tabla_salaries = """
                                     );
                                 """
 
-query_creacion_tabla_salaries = """
+query_creacion_tabla_cv_details = """
                                     CREATE TABLE abc_corporation.cv_details(
                                     employee_number INT NOT NULL,
                                     num_companies_worked INT,        -- > Número de compañías en las que el empleado ha trabajado.
@@ -74,3 +74,15 @@ query_creacion_tabla_salaries = """
                                     FOREIGN KEY (employee_number) REFERENCES employees (employee_number)
                                     );
                                 """
+                                
+query_insertar_employees = " INSERT INTO employees (employee_number,age,gender,year_birth,marital_status,attrition) VALUES (%,%,%,%,%,%)"
+
+query_employees_employees_details = " INSERT INTO employees_details (employee_number,department,job_role,remote_work,distance_from_home,overtime,business_travel,stock_option_level) VALUES (%,%,%,%,%,%,%,%)"
+
+query_insertar_education = " INSERT INTO education (employee_number,education,education_field) VALUES (%,%)"
+
+query_insertar_salaries = " INSERT INTO salaries (employee_number,monthly_income,monthly_rate,hourly_rate,percent_salary_hike) VALUES (%,%,%,%,%,%)"
+
+query_insertar_satisfaction = " INSERT INTO satisfaction (employee_number,environment_satisfaction,job_involvement,job_satisfaction,relationship_satisfaction,work_life_balance) VALUES (%,%,%,%,%,%)"
+
+query_insertar_cv_details = " INSERT INTO cv_details (employee_number,num_companies_worked,training_times_last_year,total_working_years,years_at_company,years_since_last_promotion,years_with_curr_manager) VALUES (%,%,%,%,%,%,%)"

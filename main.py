@@ -9,7 +9,7 @@ def main():
     root.wm_title("ABC Corporation")
     app=Ventana(root) #Creamos una clase de tipo ventana.
     app.mainloop()
-    
+   
     
 if __name__ == '__main__':
     main()
