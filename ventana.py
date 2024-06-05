@@ -7,14 +7,9 @@ from conexion import  DAO
 import queries as qu
 import pandas as pd
 import numpy as np
+import convertir_int32
 
 
-def barra_menu (root):
-   barra_menu =ttk.menu(root)
-   root.config(menu=barra_menu,width=300, heigth=300)
-   
-   menu_inicio = ttk.menu(barra_menu)
-   barra_menu.add_cascade(label="Inicio", menu=menu_inicio)
 
 class Ventana(Frame): #Clase ventana de tipo frame
     
@@ -45,15 +40,16 @@ class Ventana(Frame): #Clase ventana de tipo frame
     
     def fCargarDatos(self):
         
-      url ="https://raw.githubusercontent.com/Violainedlst/proyecto-da-promo-H-modulo-3-team-2-People-pulse/main/HR%20RAW%20DATA%20FINAL.csv"
-      df =pd.read_csv(url)
+      csv ="HR_RAW_DATA_FINAL.csv"
+      df =pd.read_csv(csv,index_col=0)
+
       
-      datos_tabla_employees= list(set(zip(df["employee_number"].values,df["age"].values,df["gender"].values,df["year_birth"].values,df["marital_status"].values,df["attrition"].values)))
-      datos_tabla_employees_details= list(set(zip(df["employee_number"].values,df["department"].values,df["job_role"].values,df["remote_work"].values,df["distance_from_home"].values,df["overtime"].values,df["business_travel"].values,df["stock_option_level"].values)))
-      datos_tabla_education= list(set(zip(df["employee_number"].values,df["education"].values,df["education_field"].values)))
-      datos_tabla_salaries = list(set(zip(df["employee_number"].values,df["monthly_income"].values,df["monthly_rate"].values,df["hourly_rate"].values,df["percent_salary_hike"].values)))
-      datos_tabla_satisfaction = list(set(zip(df["employee_number"].values,df["environment_satisfaction"].values,df["job_involvement"].values,df["job_satisfaction"].values,df["relationship_satisfaction"].values,df["work_life_balance"].values)))
-      datos_tabla_cv_details = list(set(zip(df["employee_number"].values,df["num_companies_worked"].values,df["training_times_last_year"].values,df["total_working_years"].values,df["years_at_company"].values,df["years_since_last_promotion"].values,df["years_with_curr_manager"].values)))
+      datos_tabla_employees= list(set(zip(int(df["employee_number"].values),int(df["age"].values),df["gender"].values,int(df["year_birth"].values),df["marital_status"].values,df["attrition"].values)))
+      datos_tabla_employees_details= list(set(zip(int(df["employee_number"].values),df["department"].values,df["job_role"].values,df["remote_work"].values,int(df["distance_from_home"].values),df["overtime"].values,df["business_travel"].values,int(df["stock_option_level"].values))))
+      datos_tabla_education= list(set(zip(int(df["employee_number"].values),int(df["education"].values),df["education_field"].values)))
+      datos_tabla_salaries = list(set(zip(int(df["employee_number"].values),df["monthly_income"].values,int(df["monthly_rate"].values),int(df["hourly_rate"].values),int(df["percent_salary_hike"].values))))
+      datos_tabla_satisfaction = list(set(zip(int(df["employee_number"].values),int(df["environment_satisfaction"].values),int(df["job_involvement"].values),int(df["job_satisfaction"].values),int(df["relationship_satisfaction"].values),int(df["work_life_balance"].values))))
+      datos_tabla_cv_details = list(set(zip(int(df["employee_number"].values),int(df["num_companies_worked"].values),int(df["training_times_last_year"].values),int(df["total_working_years"].values),int(df["years_at_company"].values),int(df["years_since_last_promotion"].values),int(df["years_with_curr_manager"].values))))
       self.dao.cargar_datos_BBDD(qu.query_insertar_employees,'abc_corporation',datos_tabla_employees)
       self.dao.cargar_datos_BBDD(qu.query_insertar_employees_details,'abc_corporation',datos_tabla_employees_details) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_education,'abc_corporation',datos_tabla_education) 
