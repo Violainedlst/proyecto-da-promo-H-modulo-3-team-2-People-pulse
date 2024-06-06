@@ -47,6 +47,8 @@ class Ventana(Frame): #Clase ventana de tipo frame
       df =pd.read_csv(csv,index_col=0)
       print(df.info())
       
+      
+      
       '''columnas_convertidas = ["hourly_rate","work_life_balance","age","daily_rate","distance_from_home","education", "employee_number", "environment_satisfaction", "job_involvement", "job_level", "job_satisfaction", "monthly_rate", "num_companies_worked", "percent_salary_hike", "relationship_satisfaction", "stock_option_level", "training_times_last_year", "total_working_years","years_at_company", "years_since_last_promotion", "years_with_curr_manager", "year_birth"]
       for col in columnas_convertidas:
              df[col] = df[col].apply(lambda x: x.item())'''
