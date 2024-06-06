@@ -2,12 +2,15 @@ from os import stat
 from tkinter import * 
 from tkinter import ttk,Toplevel, Frame, Label, Button
 from tkinter import messagebox as Msg
+from tkinter import filedialog as FileDialog
 from PIL import Image, ImageTk
 from conexion import  DAO
 import queries as qu
 import pandas as pd
 import numpy as np
 import convertir_int32
+import subprocess
+import os
 
 
 
@@ -42,14 +45,19 @@ class Ventana(Frame): #Clase ventana de tipo frame
         
       csv ="HR_RAW_DATA_FINAL.csv"
       df =pd.read_csv(csv,index_col=0)
-
+      print(df.info())
       
-      datos_tabla_employees= list(set(zip(int(df["employee_number"].values),int(df["age"].values),df["gender"].values,int(df["year_birth"].values),df["marital_status"].values,df["attrition"].values)))
-      datos_tabla_employees_details= list(set(zip(int(df["employee_number"].values),df["department"].values,df["job_role"].values,df["remote_work"].values,int(df["distance_from_home"].values),df["overtime"].values,df["business_travel"].values,int(df["stock_option_level"].values))))
-      datos_tabla_education= list(set(zip(int(df["employee_number"].values),int(df["education"].values),df["education_field"].values)))
-      datos_tabla_salaries = list(set(zip(int(df["employee_number"].values),df["monthly_income"].values,int(df["monthly_rate"].values),int(df["hourly_rate"].values),int(df["percent_salary_hike"].values))))
-      datos_tabla_satisfaction = list(set(zip(int(df["employee_number"].values),int(df["environment_satisfaction"].values),int(df["job_involvement"].values),int(df["job_satisfaction"].values),int(df["relationship_satisfaction"].values),int(df["work_life_balance"].values))))
-      datos_tabla_cv_details = list(set(zip(int(df["employee_number"].values),int(df["num_companies_worked"].values),int(df["training_times_last_year"].values),int(df["total_working_years"].values),int(df["years_at_company"].values),int(df["years_since_last_promotion"].values),int(df["years_with_curr_manager"].values))))
+      '''columnas_convertidas = ["hourly_rate","work_life_balance","age","daily_rate","distance_from_home","education", "employee_number", "environment_satisfaction", "job_involvement", "job_level", "job_satisfaction", "monthly_rate", "num_companies_worked", "percent_salary_hike", "relationship_satisfaction", "stock_option_level", "training_times_last_year", "total_working_years","years_at_company", "years_since_last_promotion", "years_with_curr_manager", "year_birth"]
+      for col in columnas_convertidas:
+             df[col] = df[col].apply(lambda x: x.item())'''
+      
+      datos_tabla_employees= list(set(zip(df["employee_number"].values,df["age"].values,df["gender"].values,df["year_birth"].values,df["marital_status"].values,df["attrition"].values)))
+      datos_tabla_employees_details= list(set(zip(df["employee_number"].values,df["department"].values,df["job_role"].values,df["remote_work"].values,df["distance_from_home"].values,df["overtime"].values,df["business_travel"].values,df["stock_option_level"].values)))
+      datos_tabla_education= list(set(zip(df["employee_number"].values,df["education"].values,df["education_field"].values)))
+      datos_tabla_salaries = list(set(zip(df["employee_number"].values,df["monthly_income"].values,df["monthly_rate"].values,df["hourly_rate"].values,df["percent_salary_hike"].values)))
+      datos_tabla_satisfaction = list(set(zip(df["employee_number"].values,df["environment_satisfaction"].values,df["job_involvement"].values,df["job_satisfaction"].values,df["relationship_satisfaction"].values,df["work_life_balance"].values)))
+      datos_tabla_cv_details = list(set(zip(df["employee_number"].values,df["num_companies_worked"].values,df["training_times_last_year"].values,df["total_working_years"].values,df["years_at_company"].values,df["years_since_last_promotion"].values,df["years_with_curr_manager"].values)))  
+      
       self.dao.cargar_datos_BBDD(qu.query_insertar_employees,'abc_corporation',datos_tabla_employees)
       self.dao.cargar_datos_BBDD(qu.query_insertar_employees_details,'abc_corporation',datos_tabla_employees_details) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_education,'abc_corporation',datos_tabla_education) 
@@ -66,12 +74,16 @@ class Ventana(Frame): #Clase ventana de tipo frame
     def fMantenimientoEmpleados(self):
        pass
     
-    def fAnalisisDatos(self):
-       
-       ventana_analisis=Toplevel(self, bg="#8A86B2")
-       ventana_analisis.geometry("1000x400")
-       
-       boton1 = ttk.Button(ventana_analisis, text="boton1", command='')
+    def fInformeResultados(self):
+        ruta_pdf = "InformeAnalisis.pdf"  # Cambia esto por la ruta de tu archivo PDF
+        try:
+            if os.name == 'nt':  # Para sistemas Windows
+                os.startfile(ruta_pdf)
+            elif os.name == 'posix':  # Para sistemas Unix (Linux, macOS)
+                subprocess.call(('open', ruta_pdf) if sys.platform == 'darwin' else ('xdg-open', ruta_pdf))
+        except Exception as e:
+            print(f"Error al abrir el archivo PDF: {e}")
+      
         
     def fmostrar_frame_mantenimiento(self):
         # Esconder otros frames si es necesario
@@ -114,7 +126,7 @@ class Ventana(Frame): #Clase ventana de tipo frame
         self.btnMantenimiento.place(x=15,y=200,width=150,height=40) 
         
         #Boton Nuevo
-        self.btnAnalisisDatos=Button(frame1,text="Analisis de datos",command=self.fAnalisisDatos, bg="#3D3681", fg="white")
+        self.btnAnalisisDatos=Button(frame1,text="Informe Resultados ",command=self.fInformeResultados, bg="#3D3681", fg="white")
         self.btnAnalisisDatos.place(x=15,y=250,width=150,height=40) 
         
         #el frame 2 con la imagen de la empresa

@@ -87,3 +87,5 @@ query_insertar_satisfaction = " INSERT INTO abc_corporation.satisfaction (employ
 
 query_insertar_cv_details = " INSERT INTO abc_corporation.cv_details (employee_number,num_companies_worked,training_times_last_year,total_working_years,years_at_company,years_since_last_promotion,years_with_curr_manager) VALUES (%,%,%,%,%,%,%)"
 
+
+

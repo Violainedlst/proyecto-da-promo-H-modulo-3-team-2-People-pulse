@@ -18,7 +18,6 @@ def convertir_df(data):
             try:
                 data[col] = data[col].apply(lambda x: int(x) if not pd.isna(x) else x)
                 data[col] = data[col].astype(int)
-                data[col].dtype
                 print(f"Columna {col} convertida a int nativo de Python")
             except Exception as e:
                 print(f"Error al convertir la columna {col}: {e}")
