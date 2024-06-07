@@ -11,6 +11,7 @@ query_creacion_tabla_employees = """
                                 );
                                 
                                 """
+                                
 
 query_creacion_tabla_employees_details = """    
                                         CREATE TABLE abc_corporation.employees_details (

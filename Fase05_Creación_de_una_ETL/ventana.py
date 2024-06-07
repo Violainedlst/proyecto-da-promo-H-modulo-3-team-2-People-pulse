@@ -42,27 +42,31 @@ class Ventana(Frame): #Clase ventana de tipo frame
        
     def fCargarDatos(self):
         
-      url ="https://raw.githubusercontent.com/Violainedlst/proyecto-da-promo-H-modulo-3-team-2-People-pulse/main/CSVs/HR_RAW_DATA_LIMPIO.csv"
+      url ="D:\Repositorios Adalab\proyecto-da-promo-H-modulo-3-team-2-People-pulse\CSVs\datos_limpios.csv"
       df =pd.read_csv(url,index_col=0)
       print(df.info())
  
            
       
-      '''datos_tabla_employees= list(set(zip(df["employee_number"].values,df["age"].values,df["gender"].values,df["year_birth"].values,df["marital_status"].values,df["attrition"].values)))
+      
+      '''columnas_convertidas = ["hourly_rate","work_life_balance","age","daily_rate","distance_from_home","education", "employee_number", "environment_satisfaction", "job_involvement", "job_level", "job_satisfaction", "monthly_rate", "num_companies_worked", "percent_salary_hike", "relationship_satisfaction", "stock_option_level", "training_times_last_year", "total_working_years","years_at_company", "years_since_last_promotion", "years_with_curr_manager", "year_birth"]
+      for col in columnas_convertidas:
+             df[col] = df[col].apply(lambda x: x.item())'''
+      
+      datos_tabla_employees= list(set(zip(df["employee_number"].values,df["age"].values,df["gender"].values,df["year_birth"].values,df["marital_status"].values,df["attrition"].values)))
       datos_tabla_employees_details= list(set(zip(df["employee_number"].values,df["department"].values,df["job_role"].values,df["remote_work"].values,df["distance_from_home"].values,df["overtime"].values,df["business_travel"].values,df["stock_option_level"].values)))
       datos_tabla_education= list(set(zip(df["employee_number"].values,df["education"].values,df["education_field"].values)))
       datos_tabla_salaries = list(set(zip(df["employee_number"].values,df["monthly_income"].values,df["monthly_rate"].values,df["hourly_rate"].values,df["percent_salary_hike"].values)))
       datos_tabla_satisfaction = list(set(zip(df["employee_number"].values,df["environment_satisfaction"].values,df["job_involvement"].values,df["job_satisfaction"].values,df["relationship_satisfaction"].values,df["work_life_balance"].values)))
-      datos_tabla_cv_details = list(set(zip(df["employee_number"].values,df["num_companies_worked"].values,df["training_times_last_year"].values,df["total_working_years"].values,df["years_at_company"].values,df["years_since_last_promotion"].values,df["years_with_curr_manager"].values)))  '''
-        
-      #print(datos_tabla_employees)
+      datos_tabla_cv_details = list(set(zip(df["employee_number"].values,df["num_companies_worked"].values,df["training_times_last_year"].values,df["total_working_years"].values,df["years_at_company"].values,df["years_since_last_promotion"].values,df["years_with_curr_manager"].values)))  
       
-      '''self.dao.cargar_datos_BBDD(qu.query_insertar_employees,'abc_corporation',datos_tabla_employees)
+      self.dao.cargar_datos_BBDD(qu.query_insertar_employees,'abc_corporation',datos_tabla_employees)
       self.dao.cargar_datos_BBDD(qu.query_insertar_employees_details,'abc_corporation',datos_tabla_employees_details) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_education,'abc_corporation',datos_tabla_education) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_salaries,'abc_corporation',datos_tabla_salaries) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_satisfaction,'abc_corporation',datos_tabla_satisfaction) 
-      self.dao.cargar_datos_BBDD(qu.query_insertar_cv_details,'abc_corporation',datos_tabla_cv_details)'''
+      self.dao.cargar_datos_BBDD(qu.query_insertar_cv_details,'abc_corporation',datos_tabla_cv_details)    
+         
              
     def fInformeResultados(self):
         ruta_pdf = "InformeAnalisis.pdf"  # Cambia esto por la ruta de tu archivo PDF
@@ -84,7 +88,7 @@ class Ventana(Frame): #Clase ventana de tipo frame
         # Mostrar el frame de mantenimiento de empleados
         self.frame_mantenimiento.place(x=0, width=200, height=399)
                 
-        
+    # Falta implementación, se hará en versión 2.0   
     def falta_empleado(self):
         self.dao.mantenimiento_empleados(qu.query_insertar_employees,'abc_corporation',employees)
         
@@ -99,6 +103,8 @@ class Ventana(Frame): #Clase ventana de tipo frame
     def feliminar_empleado(self):
         self.dao.mantenimiento_empleados(qu.query_borrar_employees,'abc_corporation',employees)
         Msg.showinfo("Eliminar", "Eliminar empleado")
+        
+    # FIN FALTA IMPLENTACION
     
     def crear_widgets(self):
        
