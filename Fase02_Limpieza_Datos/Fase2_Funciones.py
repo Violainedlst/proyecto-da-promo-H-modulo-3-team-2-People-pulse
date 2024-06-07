@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Leer el fichero csv desde GitHub
-url = "https://raw.githubusercontent.com/Violainedlst/proyecto-da-promo-H-modulo-3-team-2-People-pulse/main/HR_RAW_DATA.csv"
+url = "https://raw.githubusercontent.com/Violainedlst/proyecto-da-promo-H-modulo-3-team-2-People-pulse/main/CSVs/HR_RAW_DATA.csv"
 data_bruto = pd.read_csv(url)
 
 # Para ver el fichero entero
