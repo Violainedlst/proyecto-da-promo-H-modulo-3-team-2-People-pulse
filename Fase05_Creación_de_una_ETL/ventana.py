@@ -39,35 +39,26 @@ class Ventana(Frame): #Clase ventana de tipo frame
       self.dao.creacion_bbdd_tablas(qu.query_creacion_tabla_cv_details,'abc_corporation')
       self.test()
     
-    def convert_to_native_type(self,value):
-            if isinstance(value, np.generic):
-                return value.item()  # Convertir a tipo nativo de Python
-            return value
        
     def fCargarDatos(self):
         
-      csv =r"CSVs\HR_RAW_DATA_LIMPIO.csv"
-      df =pd.read_csv(csv,index_col=0)
+      url ="https://raw.githubusercontent.com/Violainedlst/proyecto-da-promo-H-modulo-3-team-2-People-pulse/main/CSVs/HR_RAW_DATA_LIMPIO.csv"
+      df =pd.read_csv(url,index_col=0)
       print(df.info())
-      
+ 
            
-
-      datos_tabla_employees= list(set(zip(df["employee_number"].values,df["age"].values,df["gender"].values,df["year_birth"].values,df["marital_status"].values,df["attrition"].values)))
-      '''datos_tabla_employees_details= list(set(zip(df["employee_number"].values,df["department"].values,df["job_role"].values,df["remote_work"].values,df["distance_from_home"].values,df["overtime"].values,df["business_travel"].values,df["stock_option_level"].values)))
+      
+      '''datos_tabla_employees= list(set(zip(df["employee_number"].values,df["age"].values,df["gender"].values,df["year_birth"].values,df["marital_status"].values,df["attrition"].values)))
+      datos_tabla_employees_details= list(set(zip(df["employee_number"].values,df["department"].values,df["job_role"].values,df["remote_work"].values,df["distance_from_home"].values,df["overtime"].values,df["business_travel"].values,df["stock_option_level"].values)))
       datos_tabla_education= list(set(zip(df["employee_number"].values,df["education"].values,df["education_field"].values)))
       datos_tabla_salaries = list(set(zip(df["employee_number"].values,df["monthly_income"].values,df["monthly_rate"].values,df["hourly_rate"].values,df["percent_salary_hike"].values)))
       datos_tabla_satisfaction = list(set(zip(df["employee_number"].values,df["environment_satisfaction"].values,df["job_involvement"].values,df["job_satisfaction"].values,df["relationship_satisfaction"].values,df["work_life_balance"].values)))
       datos_tabla_cv_details = list(set(zip(df["employee_number"].values,df["num_companies_worked"].values,df["training_times_last_year"].values,df["total_working_years"].values,df["years_at_company"].values,df["years_since_last_promotion"].values,df["years_with_curr_manager"].values)))  '''
-      
-      datos_tabla_employees = [
-      tuple(self.convert_to_native_type(value) for value in row)
-      for row in datos_tabla_employees
-      ]
         
-
+      #print(datos_tabla_employees)
       
-      self.dao.cargar_datos_BBDD(qu.query_insertar_employees,'abc_corporation',datos_tabla_employees)
-      '''self.dao.cargar_datos_BBDD(qu.query_insertar_employees_details,'abc_corporation',datos_tabla_employees_details) 
+      '''self.dao.cargar_datos_BBDD(qu.query_insertar_employees,'abc_corporation',datos_tabla_employees)
+      self.dao.cargar_datos_BBDD(qu.query_insertar_employees_details,'abc_corporation',datos_tabla_employees_details) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_education,'abc_corporation',datos_tabla_education) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_salaries,'abc_corporation',datos_tabla_salaries) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_satisfaction,'abc_corporation',datos_tabla_satisfaction) 
