@@ -170,3 +170,6 @@ data = fill_na_values(data)
 data = replace_age_values(data)
 data = convert_columns_to_int(data)
 print_unique_values(data)
+
+# Convertimos el resultado en un csv
+data.to_csv('HR_RAW_DATA_LIMPIO.csv')
