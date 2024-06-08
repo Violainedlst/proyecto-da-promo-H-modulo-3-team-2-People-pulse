@@ -70,22 +70,5 @@ class DAO:
                 cursor.close()
                 conexion.close()
              
-    def mantenimiento_empleados (self,query,nombre_bbdd,tupla):
-        conexion =mysql.connector.connect(user = 'root',password='AlumnaAdalab',host='localhost',port='3306',database=nombre_bbdd)
-        cursor =conexion.cursor()
-        
-        try:
-            cursor.execute(query,tupla)    
-            conexion.commit()
-            print("Empleado dado de alta correctamente")
-        
-        except mysql.connector.Error as err:
-                print(err)
-                print("Error Code:", err.errno)
-                print("SQLSTATE", err.sqlstate)
-                print("Message", err.msg)
-                
-        finally:
-                cursor.close()
-                conexion.close()
+    
         
