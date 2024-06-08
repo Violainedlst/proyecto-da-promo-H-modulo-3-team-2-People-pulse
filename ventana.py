@@ -40,32 +40,62 @@ class Ventana(Frame): #Clase ventana de tipo frame
       self.dao.creacion_bbdd_tablas(qu.query_creacion_tabla_cv_details,'abc_corporation')
       self.test()
     
+       
+    def convertir_int(self,lista_tuplas):
+        datos_tabla=[]
+        for tupla in lista_tuplas:
+            lista_intermedia=[]
+            for elemento in tupla:
+                try:
+                   
+                    lista_intermedia.append(int(elemento))
+                except:
+                    lista_intermedia.append(elemento)
+        
+            datos_tabla.append(tuple(lista_intermedia))
+        return datos_tabla
     
     def fCargarDatos(self):
         
-      csv ="HR_RAW_DATA_FINAL.csv"
+      csv =r"D:\Repositorios Adalab\proyecto-da-promo-H-modulo-3-team-2-People-pulse\HR_RAW_DATA_LIMPIO.csv"
       df =pd.read_csv(csv,index_col=0)
-      print(df.info())
+      df.fillna('n/a', inplace=True)
       
-      
-      
-      '''columnas_convertidas = ["hourly_rate","work_life_balance","age","daily_rate","distance_from_home","education", "employee_number", "environment_satisfaction", "job_involvement", "job_level", "job_satisfaction", "monthly_rate", "num_companies_worked", "percent_salary_hike", "relationship_satisfaction", "stock_option_level", "training_times_last_year", "total_working_years","years_at_company", "years_since_last_promotion", "years_with_curr_manager", "year_birth"]
-      for col in columnas_convertidas:
-             df[col] = df[col].apply(lambda x: x.item())'''
-      
-      datos_tabla_employees= list(set(zip(df["employee_number"].values,df["age"].values,df["gender"].values,df["year_birth"].values,df["marital_status"].values,df["attrition"].values)))
-      datos_tabla_employees_details= list(set(zip(df["employee_number"].values,df["department"].values,df["job_role"].values,df["remote_work"].values,df["distance_from_home"].values,df["overtime"].values,df["business_travel"].values,df["stock_option_level"].values)))
-      datos_tabla_education= list(set(zip(df["employee_number"].values,df["education"].values,df["education_field"].values)))
-      datos_tabla_salaries = list(set(zip(df["employee_number"].values,df["monthly_income"].values,df["monthly_rate"].values,df["hourly_rate"].values,df["percent_salary_hike"].values)))
-      datos_tabla_satisfaction = list(set(zip(df["employee_number"].values,df["environment_satisfaction"].values,df["job_involvement"].values,df["job_satisfaction"].values,df["relationship_satisfaction"].values,df["work_life_balance"].values)))
-      datos_tabla_cv_details = list(set(zip(df["employee_number"].values,df["num_companies_worked"].values,df["training_times_last_year"].values,df["total_working_years"].values,df["years_at_company"].values,df["years_since_last_promotion"].values,df["years_with_curr_manager"].values)))  
+           
+      datos_tabla_employees= list(df[['employee_number', 'age','gender','year_birth','marital_status','attrition']].itertuples(index=False, name=None))     
+      datos_tabla_employees_details= list(df[["employee_number","department","job_role","remote_work","distance_from_home","overtime","business_travel","stock_option_level"]].itertuples(index=False, name=None))
+      datos_tabla_education= list(df[["employee_number","education","education_field"]].itertuples(index=False, name=None))
+      datos_tabla_salaries = list(df[["employee_number","monthly_income","monthly_rate","hourly_rate","percent_salary_hike"]].itertuples(index=False, name=None))
+      datos_tabla_satisfaction = list(df[["employee_number","environment_satisfaction","job_involvement","job_satisfaction","relationship_satisfaction","work_life_balance"]].itertuples(index=False, name=None))
+      datos_tabla_cv_details = list(df[["employee_number","num_companies_worked","training_times_last_year","total_working_years","years_at_company","years_since_last_promotion","years_with_curr_manager"]].itertuples(index=False, name=None))
+        
+      datos_tabla_employees=self.convertir_int(datos_tabla_employees)
+      datos_tabla_employees_details=self.convertir_int(datos_tabla_employees_details)
+      datos_tabla_education=self.convertir_int(datos_tabla_education)
+      datos_tabla_salaries=self.convertir_int(datos_tabla_salaries)
+      datos_tabla_satisfaction=self.convertir_int(datos_tabla_satisfaction)
+      datos_tabla_cv_details=self.convertir_int(datos_tabla_cv_details)
       
       self.dao.cargar_datos_BBDD(qu.query_insertar_employees,'abc_corporation',datos_tabla_employees)
       self.dao.cargar_datos_BBDD(qu.query_insertar_employees_details,'abc_corporation',datos_tabla_employees_details) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_education,'abc_corporation',datos_tabla_education) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_salaries,'abc_corporation',datos_tabla_salaries) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_satisfaction,'abc_corporation',datos_tabla_satisfaction) 
-      self.dao.cargar_datos_BBDD(qu.query_insertar_cv_details,'abc_corporation',datos_tabla_cv_details)    
+      self.dao.cargar_datos_BBDD(qu.query_insertar_cv_details,'abc_corporation',datos_tabla_cv_details)
+      
+      
+    '''def fCargarDatos(self):
+        csv ="D:\Repositorios Adalab\proyecto-da-promo-H-modulo-3-team-2-People-pulse\HR_RAW_DATA_FINAL.csv"
+        df =pd.read_csv(csv,index_col=0)
+        df.fillna('n/a', inplace=True)
+        
+        
+        
+        datos_tabla_employees = list(df[['employee_number', 'age','gender','year_birth','marital_status','attrition']].itertuples(index=False, name=None))
+        print(datos_tabla_employees)
+        datos_tabla_employees=self.convertir_int(datos_tabla_employees)
+        self.dao.cargar_datos_BBDD(qu.query_insertar_employees,'abc_corporation',datos_tabla_employees)'''
+
          
     def fNuevo(self):  
        pass    
