@@ -87,6 +87,28 @@ def drop_unnecessary_columns(df):
     df = df.drop(columns=existing_columns_to_drop)
     return df
 
+# Rellenamos, de forma consecutiva, nulos en 'employee_number'
+def update_employee_numbers(df):
+    # Convertir la columna 'employee_number' a numérico, forzando errores a NaN, y luego a entero
+    df['employee_number'] = pd.to_numeric(df['employee_number'].str.replace(',', ''), errors='coerce').fillna(0).astype(int)
+    
+    # Primero tengo que filtrar por los números que ya existen
+    numeros_actuales = df[df["employee_number"] != 0]["employee_number"]
+    
+    # Busco el valor máximo como principio de mi nuevo listado de números
+    max_numeros_actuales = numeros_actuales.max()
+    
+    # Vamos a buscar cuántos empleados tienen un cero 
+    num_zeros = df[df["employee_number"] == 0].shape[0]
+    
+    # Lista de nuevos números
+    nuevos_numeros = list(range(max_numeros_actuales + 1, max_numeros_actuales + 1 + num_zeros))
+    
+    # Añado los números para todos los empleados que tengan un cero
+    df.loc[df["employee_number"] == 0, "employee_number"] = nuevos_numeros
+    
+    return df
+
 # Limpiar espacios en blanco en el DataFrame
 def strip_whitespace(df):
     # Eliminar espacios en blanco en todo el DataFrame
@@ -161,6 +183,7 @@ def convert_columns_to_int(df):
 data = lowercase_columns(data)
 data = rename_columns(data)
 data = drop_unnecessary_columns(data)
+data = update_employee_numbers(data)
 data = strip_whitespace(data)
 data = lowercase_all_strings(data)
 data = convert_to_string(data)
