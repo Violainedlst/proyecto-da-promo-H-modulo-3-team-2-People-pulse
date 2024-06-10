@@ -80,24 +80,10 @@ class Ventana(Frame): #Clase ventana de tipo frame
       self.dao.cargar_datos_BBDD(qu.query_insertar_salaries,'abc_corporation',datos_tabla_salaries) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_satisfaction,'abc_corporation',datos_tabla_satisfaction) 
       self.dao.cargar_datos_BBDD(qu.query_insertar_cv_details,'abc_corporation',datos_tabla_cv_details)
-      
-      
-    '''def fCargarDatos(self):
-        csv ="D:\Repositorios Adalab\proyecto-da-promo-H-modulo-3-team-2-People-pulse\HR_RAW_DATA_FINAL.csv"
-        df =pd.read_csv(csv,index_col=0)
-        df.fillna('n/a', inplace=True)
-        
-        
-        
-        datos_tabla_employees = list(df[['employee_number', 'age','gender','year_birth','marital_status','attrition']].itertuples(index=False, name=None))
-        print(datos_tabla_employees)
-        datos_tabla_employees=self.convertir_int(datos_tabla_employees)
-        self.dao.cargar_datos_BBDD(qu.query_insertar_employees,'abc_corporation',datos_tabla_employees)'''
-
          
              
     def fInformeResultados(self):
-        ruta_pdf = "D:\Repositorios Adalab\proyecto-da-promo-H-modulo-3-team-2-People-pulse\Fase06_Reporte_Resultados\InformeAnalisis.pdf"  # Cambia esto por la ruta de tu archivo PDF
+        ruta_pdf = r"Fase06_Reporte_Resultados\InformeAnalisis.pdf"  # Cambia esto por la ruta de tu archivo PDF
         try:
             if os.name == 'nt':  # Para sistemas Windows
                 os.startfile(ruta_pdf)
@@ -106,8 +92,8 @@ class Ventana(Frame): #Clase ventana de tipo frame
         except Exception as e:
             print(f"Error al abrir el archivo PDF: {e}")
       
-        
-    def fmostrar_frame_mantenimiento(self):
+    # Falta implementación, se hará en versión 2.0      
+    '''def fmostrar_frame_mantenimiento(self):
         # Esconder otros frames si es necesario
         for widget in self.winfo_children():
             if widget != self.frame_mantenimiento:
@@ -116,7 +102,7 @@ class Ventana(Frame): #Clase ventana de tipo frame
         # Mostrar el frame de mantenimiento de empleados
         self.frame_mantenimiento.place(x=0, width=200, height=399)
                 
-    # Falta implementación, se hará en versión 2.0   
+    
     def falta_empleado(self):
         self.dao.mantenimiento_empleados(qu.query_insertar_employees,'abc_corporation',employees)
         
@@ -130,7 +116,7 @@ class Ventana(Frame): #Clase ventana de tipo frame
         
     def feliminar_empleado(self):
         self.dao.mantenimiento_empleados(qu.query_borrar_employees,'abc_corporation',employees)
-        Msg.showinfo("Eliminar", "Eliminar empleado")
+        Msg.showinfo("Eliminar", "Eliminar empleado")'''
         
     # FIN FALTA IMPLENTACION
     
@@ -142,19 +128,19 @@ class Ventana(Frame): #Clase ventana de tipo frame
         
         #Boton Nuevo
         self.btnNuevaBBDD=Button(frame1,text="Crear BBDD y Tablas",command=self.fNuevaBBDDyTablas, bg="#3D3681", fg="white")
-        self.btnNuevaBBDD.place(x=15,y=100,width=150,height=40)
+        self.btnNuevaBBDD.place(x=15,y=125,width=150,height=40)
         
         #Boton Nuevo
         self.btnNuevaBBDD=Button(frame1,text="Cargar Datos",command=self.fCargarDatos, bg="#3D3681", fg="white")
-        self.btnNuevaBBDD.place(x=15,y=150,width=150,height=40)    
+        self.btnNuevaBBDD.place(x=15,y=175,width=150,height=40)    
               
         #Boton Nuevo
-        self.btnMantenimiento=Button(frame1,text="Mantenimiento empleados",command=self.fmostrar_frame_mantenimiento, bg="#3D3681", fg="white")
-        self.btnMantenimiento.place(x=15,y=200,width=150,height=40) 
+        #self.btnMantenimiento=Button(frame1,text="Mantenimiento empleados",command=self.fmostrar_frame_mantenimiento, bg="#3D3681", fg="white")
+        #self.btnMantenimiento.place(x=15,y=200,width=150,height=40) 
         
         #Boton Nuevo
         self.btnAnalisisDatos=Button(frame1,text="Informe Resultados ",command=self.fInformeResultados, bg="#3D3681", fg="white")
-        self.btnAnalisisDatos.place(x=15,y=250,width=150,height=40) 
+        self.btnAnalisisDatos.place(x=15,y=225,width=150,height=40) 
         
         #el frame 2 con la imagen de la empresa
         
@@ -170,8 +156,8 @@ class Ventana(Frame): #Clase ventana de tipo frame
         self.logo_label = Label(self, image=self.photo)
         self.logo_label.place(relx=0.5, rely=0.5, anchor=CENTER)
         
-      # Frame para el mantenimiento de empleados
-        self.frame_mantenimiento = Frame(self, bg="#040452")
+      # Frame para el mantenimiento de empleados, se implementará en la versión 2.0
+        '''self.frame_mantenimiento = Frame(self, bg="#040452")
           
         self.boton_alta = Button(self.frame_mantenimiento, text="Alta", command=self.falta_empleado, bg="#3D3681", fg="white")
         self.boton_alta.place(x=15, y=50, width=150, height=40)
@@ -180,7 +166,7 @@ class Ventana(Frame): #Clase ventana de tipo frame
         self.boton_baja.place(x=15, y=100, width=150, height=40)
         
         self.boton_modificar = Button(self.frame_mantenimiento, text="Modificar", command=self.fmodificar_empleado, bg="#3D3681", fg="white")
-        self.boton_modificar.place(x=15, y=150, width=150, height=40)
+        self.boton_modificar.place(x=15, y=150, width=150, height=40)'''
         
 
         

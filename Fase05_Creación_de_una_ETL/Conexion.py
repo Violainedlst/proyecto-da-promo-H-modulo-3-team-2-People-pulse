@@ -2,14 +2,7 @@
 import mysql.connector
 from mysql.connector import Error
 from mysql.connector import errorcode
-from tkinter import messagebox
-import Fase05_Creación_de_una_ETL.queries as qu
-import pandas as pd
-import tkinter as tk
-import numpy as np
-import requests
-import re
-import os
+
 
 class DAO:
     def __init__(self):
