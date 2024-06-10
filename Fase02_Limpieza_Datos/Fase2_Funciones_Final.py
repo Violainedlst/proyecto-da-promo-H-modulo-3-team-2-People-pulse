@@ -88,24 +88,22 @@ def drop_unnecessary_columns(df):
     return df
 
 # Rellenamos, de forma consecutiva, nulos en 'employee_number'
-def update_employee_numbers(df):
+def update_employee_numbers(df, column_name):
     # Convertir la columna 'employee_number' a numérico, forzando errores a NaN, y luego a entero
     df['employee_number'] = pd.to_numeric(df['employee_number'].str.replace(',', ''), errors='coerce').fillna(0).astype(int)
     
-    # Primero tengo que filtrar por los números que ya existen
-    numeros_actuales = df[df["employee_number"] != 0]["employee_number"]
+    # Identificar duplicados en la columna
+    duplicados = df.duplicated(subset=column_name, keep=False)
     
-    # Busco el valor máximo como principio de mi nuevo listado de números
-    max_numeros_actuales = numeros_actuales.max()
+    # Obtener los valores únicos actuales
+    valores_unicos = set(df[column_name])
     
-    # Vamos a buscar cuántos empleados tienen un cero 
-    num_zeros = df[df["employee_number"] == 0].shape[0]
+    # Inicializar un nuevo número que no esté en valores_unicos
+    max_valor_actual = max(valores_unicos)
+    nuevos_numeros = iter(range(max_valor_actual + 1, max_valor_actual + 1 + duplicados.sum()))
     
-    # Lista de nuevos números
-    nuevos_numeros = list(range(max_numeros_actuales + 1, max_numeros_actuales + 1 + num_zeros))
-    
-    # Añado los números para todos los empleados que tengan un cero
-    df.loc[df["employee_number"] == 0, "employee_number"] = nuevos_numeros
+    # Asignar nuevos números a las filas duplicadas
+    df.loc[duplicados, column_name] = [next(nuevos_numeros) for _ in range(duplicados.sum())]
     
     return df
 
