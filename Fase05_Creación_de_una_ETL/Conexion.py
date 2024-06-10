@@ -2,6 +2,7 @@
 import mysql.connector
 from mysql.connector import Error
 from mysql.connector import errorcode
+from tkinter import messagebox as Msg
 
 
 class DAO:
@@ -29,6 +30,7 @@ class DAO:
         else:
             conexion =mysql.connector.connect(user = 'root',password='AlumnaAdalab',host='localhost',port='3306',database=nombre_BBDD)
             cursor=conexion.cursor()
+            
             try:
                 cursor.execute(query)               
                 
@@ -51,7 +53,8 @@ class DAO:
         try:
             cursor.executemany(query,lista_tuplas)    
             conexion.commit()
-            print(cursor.rowcount, "Registros insertados")
+            Msg.showinfo("Info", f"{cursor.rowcount} Registros insertados") # título, mensaje
+            # print(cursor.rowcount, "Registros insertados")
         
         except mysql.connector.Error as err:
                 print(err)
