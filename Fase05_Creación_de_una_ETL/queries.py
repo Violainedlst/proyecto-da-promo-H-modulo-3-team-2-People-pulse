@@ -78,9 +78,9 @@ query_insertar_employees = "INSERT INTO abc_corporation.employees (employee_numb
 
 query_insertar_employees_details = "INSERT INTO abc_corporation.employees_details (employee_number,department,job_role,remote_work,distance_from_home,overtime,business_travel,stock_option_level) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
 
-query_insertar_education = "INSERT INTO abc_corporation.education (employee_number,education,education_field) VALUES (%s,%s)"
+query_insertar_education = "INSERT INTO abc_corporation.education (employee_number,education,education_field) VALUES (%s,%s,%s)"
 
-query_insertar_salaries = "INSERT INTO abc_corporation.salaries (employee_number,monthly_income,monthly_rate,hourly_rate,percent_salary_hike) VALUES (%s,%s,%s,%s,%s,%s)"
+query_insertar_salaries = "INSERT INTO abc_corporation.salaries (employee_number,monthly_income,monthly_rate,hourly_rate,percent_salary_hike) VALUES (%s,%s,%s,%s,%s)"
 
 query_insertar_satisfaction = "INSERT INTO abc_corporation.satisfaction (employee_number,environment_satisfaction,job_involvement,job_satisfaction,relationship_satisfaction,work_life_balance) VALUES (%s,%s,%s,%s,%s,%s)"
 
