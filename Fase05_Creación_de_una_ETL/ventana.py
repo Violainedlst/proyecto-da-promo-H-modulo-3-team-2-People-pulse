@@ -170,7 +170,7 @@ class Ventana(Frame): #Clase ventana de tipo frame
         self.btnAnalisisDatos.pack(side="left", padx=10, pady=50)
         
         #Boton ManualUsuario
-        self.btnManual=Button(frame1,text="Manual de Usuario ",command=lambda: self.fabrirfichero(r"Fase06_Reporte_Resultados\ManualdeUsuario.pptx"), bg="#C6C6CC", fg="#040452", width=20, height=2)
+        self.btnManual=Button(frame1,text="Manual de Usuario ",command=lambda: self.fabrirfichero(r"Fase06_Reporte_Resultados\Manual_de_usuario_ABC_Corporation.pdf"), bg="#C6C6CC", fg="#040452", width=20, height=2)
         self.btnManual.pack(side="left", padx=10, pady=50)
         
         #Boton ManualUsuario

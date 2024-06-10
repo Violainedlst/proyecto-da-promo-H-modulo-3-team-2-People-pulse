@@ -8,10 +8,11 @@ a = Analysis(
     pathex=['Fase05_Creación_de_una_ETL'],
     binaries=[],
     datas=[
-        ('data/*', 'data'),
-        ('resources/*', 'resources')
+        ('images/*', 'images'),
+        ('Fase06_Reporte_Resultados/*', 'Fase06_Reporte_Resultados'),
+        ('images/logo_ABC.png', 'images')
     ],
-    hiddenimports=['module1', 'module2'],
+    hiddenimports=['Conexion', 'queries','ventana'],
     hookspath=[],
     runtime_hooks=[],
     excludes=[],
